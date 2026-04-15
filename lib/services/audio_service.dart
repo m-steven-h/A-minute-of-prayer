@@ -1,3 +1,4 @@
+// services/audio_service.dart
 import 'package:audioplayers/audioplayers.dart';
 
 class AudioService {
@@ -7,17 +8,18 @@ class AudioService {
 
   final AudioPlayer _player = AudioPlayer();
 
+  // ✅ صوت الإشعارات (اللي بيشتغل لما تجي notification)
   Future<void> playNotificationSound() async {
     try {
-      await _player.play(AssetSource('sounds/notification.mp3'));
+      await _player.play(AssetSource('sounds/notification_sound.mp3'));
     } catch (e) {
       print('Error playing notification sound: $e');
     }
   }
 
+  // ✅ صوت إكمال اليوم (اللي بيشتغل لما تخلص يوم في طريق الصلاة)
   Future<void> playCompletionSound() async {
     try {
-      // ✅ تغيير: استخدام ملف مختلف لإكمال اليوم
       await _player.play(AssetSource('sounds/completion_sound.mp3'));
     } catch (e) {
       print('Error playing completion sound: $e');
