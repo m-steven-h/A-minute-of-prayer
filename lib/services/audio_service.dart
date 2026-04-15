@@ -11,7 +11,7 @@ class AudioService {
   Future<void> playNotificationSound() async {
     try {
       // ✅ استخدام Source.asset بشكل صحيح
-      await _player.play(AssetSource('sounds/notification_sound.mp3'));
+      await _player.play(AssetSource('sounds/notification.mp3'));
     } catch (e) {
       print('Error playing notification sound: $e');
     }
