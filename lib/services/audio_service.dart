@@ -1,4 +1,3 @@
-// services/audio_service.dart
 import 'package:audioplayers/audioplayers.dart';
 
 class AudioService {
@@ -10,7 +9,6 @@ class AudioService {
 
   Future<void> playNotificationSound() async {
     try {
-      // ✅ استخدام Source.asset بشكل صحيح
       await _player.play(AssetSource('sounds/notification.mp3'));
     } catch (e) {
       print('Error playing notification sound: $e');
@@ -19,7 +17,8 @@ class AudioService {
 
   Future<void> playCompletionSound() async {
     try {
-      await _player.play(AssetSource('sounds/notification.mp3'));
+      // ✅ تغيير: استخدام ملف مختلف لإكمال اليوم
+      await _player.play(AssetSource('sounds/completion_sound.mp3'));
     } catch (e) {
       print('Error playing completion sound: $e');
     }
