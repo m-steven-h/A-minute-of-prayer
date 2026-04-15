@@ -85,7 +85,7 @@ class NotificationService {
       scheduledTime = scheduledTime.add(const Duration(days: 1));
     }
 
-    // إعدادات Android مع تحديد ملف الصوت notification.mp3
+    // ✅ استخدام ملف الصوت الجديد للإشعارات: notification_sound
     const AndroidNotificationDetails androidDetails =
         AndroidNotificationDetails(
       'prayer_road_channel',
@@ -95,15 +95,12 @@ class NotificationService {
       priority: Priority.high,
       icon: '@mipmap/ic_launcher',
       playSound: true,
-      // تحديد ملف الصوت notification.mp3
-      // ملاحظة: يجب وضع الملف في android/app/src/main/res/raw/ بدون امتداد
-      sound: RawResourceAndroidNotificationSound('notification'),
+      sound: RawResourceAndroidNotificationSound('notification_sound'),
     );
 
-    // إعدادات iOS مع تحديد ملف الصوت notification.mp3
     const DarwinNotificationDetails iosDetails = DarwinNotificationDetails(
       presentSound: true,
-      sound: 'notification.mp3', // اسم ملف الصوت لنظام iOS
+      sound: 'notification_sound.mp3',
     );
 
     const NotificationDetails details = NotificationDetails(
@@ -136,7 +133,7 @@ class NotificationService {
     required String title,
     required String body,
   }) async {
-    // تشغيل صوت الإشعار عند الجدولة
+    // تشغيل صوت الإشعار عند الجدولة (اختياري)
     await _audioService.playNotificationSound();
 
     await scheduleDailyNotification(
@@ -166,7 +163,7 @@ class NotificationService {
     // تشغيل صوت الإشعار الفوري
     await _audioService.playNotificationSound();
 
-    // إعدادات Android للإشعار الفوري مع تحديد ملف الصوت notification.mp3
+    // ✅ استخدام نفس ملف الصوت الجديد للإشعار الفوري
     const AndroidNotificationDetails androidDetails =
         AndroidNotificationDetails(
       'prayer_road_channel',
@@ -176,14 +173,12 @@ class NotificationService {
       priority: Priority.high,
       icon: '@mipmap/ic_launcher',
       playSound: true,
-      // تحديد ملف الصوت notification.mp3 للإشعار الفوري
-      sound: RawResourceAndroidNotificationSound('notification'),
+      sound: RawResourceAndroidNotificationSound('notification_sound'),
     );
 
-    // إعدادات iOS للإشعار الفوري
     const DarwinNotificationDetails iosDetails = DarwinNotificationDetails(
       presentSound: true,
-      sound: 'notification.mp3',
+      sound: 'notification_sound.mp3',
     );
 
     const NotificationDetails details = NotificationDetails(
