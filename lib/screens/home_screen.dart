@@ -1,30 +1,27 @@
-// screens/home_screen.dart
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'profile_page.dart';
 import 'settings_page.dart';
 import 'prayer_road_page.dart';
-import 'agpeya_page.dart'; // إضافة import صفحة الأجبية
+import 'agpeya_page.dart';
 import 'meditations_list_page.dart';
 import '../providers/theme_provider.dart';
+import 'benefit_words_page.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
-
   @override
   State<HomeScreen> createState() => _HomeScreenState();
 }
 
 class _HomeScreenState extends State<HomeScreen> {
   int _selectedIndex = 1;
-
   final List<Widget> _pages = [
     const ProfilePage(),
     const MainContentPage(),
     const SettingsPage(),
   ];
-
   void _onItemTapped(int index) {
     setState(() {
       _selectedIndex = index;
@@ -37,7 +34,6 @@ class _HomeScreenState extends State<HomeScreen> {
     required String title,
   }) {
     final isSelected = _selectedIndex == index;
-
     return GestureDetector(
       onTap: () => _onItemTapped(index),
       behavior: HitTestBehavior.opaque,
@@ -154,10 +150,8 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 }
 
-// الصفحة الرئيسية الرئيسية (المحتوى)
 class MainContentPage extends StatelessWidget {
   const MainContentPage({super.key});
-
   @override
   Widget build(BuildContext context) {
     return Consumer<ThemeProvider>(
@@ -208,7 +202,6 @@ class MainContentPage extends StatelessWidget {
   }
 }
 
-// بطاقة الترحيب
 class WelcomeCard extends StatelessWidget {
   final ThemeProvider provider;
   const WelcomeCard({super.key, required this.provider});
@@ -260,7 +253,6 @@ class WelcomeCard extends StatelessWidget {
   }
 }
 
-// بطاقة آية اليوم
 class DailyVerseCard extends StatelessWidget {
   final ThemeProvider provider;
   const DailyVerseCard({super.key, required this.provider});
@@ -324,7 +316,6 @@ class DailyVerseCard extends StatelessWidget {
   }
 }
 
-// قائمة أقسام التطبيق
 class AppSectionsList extends StatelessWidget {
   final ThemeProvider provider;
   const AppSectionsList({super.key, required this.provider});
@@ -338,7 +329,6 @@ class AppSectionsList extends StatelessWidget {
           Icons.auto_stories_rounded,
           'الكتاب المقدس',
           () {
-            // TODO: انتقل لصفحة الكتاب المقدس
             _showComingSoon(context, provider);
           },
         ),
@@ -347,7 +337,6 @@ class AppSectionsList extends StatelessWidget {
           Icons.menu_book_rounded,
           'الأجبية المقدسة',
           () {
-            // الانتقال إلى صفحة الأجبية المقدسة
             Navigator.push(
               context,
               MaterialPageRoute(builder: (context) => AgpeyaPage()),
@@ -397,7 +386,10 @@ class AppSectionsList extends StatelessWidget {
           Icons.favorite,
           'كلمة منفعة',
           () {
-            _showComingSoon(context, provider);
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => const BenefitWordsPage()),
+            );
           },
         ),
       ],
